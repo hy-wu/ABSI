@@ -20,19 +20,97 @@ ABSI is a programming language whose all keywords are symbols.
 | `/`    | Division    | `1 / 2` |
 | `^`    | Exponentiation | `1 ^ 2` |
 | `=`    | Assignment  | `a = 1` |
-| `==`   | Equality    | `1 == 2` |
+| `==`   | Equality    | `x == y` |
 | `!=`   | Inequality  | `1 != 2` |
 | `>`    | Greater than | `1 > 2` |
 | `<`    | Less than   | `1 < 2` |
 | `>=`   | Greater than or equal to | `1 >= 2` |
 | `<=`   | Less than or equal to | `1 <= 2` |
 | `!`    | Not         | `!1` |
-| `&`    | And         | `1 & 2` |
-| `\|`   | Or          | `1 \| 2` |
+| `&`    | And         | `(x>0) & (y>0)` |
+| `\|`   | Or          | `(x<0) \| (x>1)` |
 | `~~`   | Bitwise NOT | `~~1` |
 | `&&`   | Bitwise AND | `1 && 2` |
 | `\|\|` | Bitwise OR  | `1 \|\| 2` |
 | `^^`   | Bitwise XOR | `1 ^^ 2` |
+
+### Control Flow
+
+| Symbol        | Description |
+| ------------- | ----------- |
+| `()?{}!{}`    | If-Else     |
+| `(x:xs){}`    | For         |
+| `(flag:?){}`  | While       |
+| `->\|`        | Break       |
+| `->>`         | Continue    |
+
+### Functions
+
+```absi
+(TypeR r1, TypeR r2, TypeP p0) foo(TypeA a0, TypeB b1, TypeC c2, TypeD d0=0) = {
+    # function body
+    >>> r1, r2, p0;
+}
+
+p = foo(a, b, c, d).p0;
+```
+
+Types, return values and parameters are optional.
+
+Example:
+
+```absi
+a_in_list1(a0, as) = {
+    (a:as){
+        (a == a0) ? {
+            >>> +;
+        }
+    }
+    >>> -;
+}
+
+>>> types >> Bool, Int, List;
+
+Bool a_in_list2(Int a0, List as) = {
+    i = 0;
+    (as[i]:?){
+        (as[i] == a0) ? {
+            >>> +;
+        }
+        i += 1;
+    }
+    >>> -;
+}
+
+# same as a0<-as
+```
+
+### Classes
+
+```absi
+Foo(TypeA a, TypeB b, TypeC c) = _{
+    .a = a;
+    .b = b;
+    .c = c;
+    .getA() = {
+        >>> .a;
+    }
+}
+
+EFoo(..., TypeD d) = Foo(...){
+    .d = d;
+    .getD() = {
+        >>> .d;
+    }
+}
+
+FFoo(TypeE e) = EFoo(0, 0, 0, d0){
+    .e = e;
+    .getE() = {
+        >>> .e;
+    }
+}
+```
 
 ## Compare with Python
 
@@ -45,15 +123,15 @@ ABSI is a programming language whose all keywords are symbols.
 | `*`       | `None`     |
 | `&`       | `and`      |
 |           | `as`       |
-| `()?:!!!` | `assert`   |
+| `()?!!!`  | `assert`   |
 | `->\|`    | `break`    |
 | `=_{}`    | `class`    |
 | `->>`     | `continue` |
 | `_()={}`  | `def`      |
 | `!_!`     | `del`      |
 |           | `elif`     |
-| `:{}`     | `else`     |
-| `:{}`     | `except`   |
+| `!{}`     | `else`     |
+| `!{}`     | `except`   |
 |           | `finally`  |
 | `(:){}`   | `for`      |
 | `>>>`     | `from`     |
@@ -70,7 +148,7 @@ ABSI is a programming language whose all keywords are symbols.
 | `!!!`     | `raise`    |
 | `>>>`     | `return`   |
 | `{}->?`   | `try`      |
-| `(?)`     | `while`    |
+| `(:?)`    | `while`    |
 |           | `with`     |
 | `->>`     | `yield`    |
 
@@ -95,7 +173,7 @@ ABSI is a programming language whose all keywords are symbols.
 |                   | `compile(source, filename, mode, flags=0, dont_inherit=False, optimize=-1)` |
 |                   | `complex([real[, imag]])` |
 |                   | `delattr(object, name)` |
-| `{=}`             | `dict(**kwarg)`   |
+| `{k v, }`         | `dict(**kwarg)`   |
 |                   | `dir([object])`   |
 | `a //%% b`        | `divmod(a, b)`    |
 | `:(start=0)`      | `enumerate(iterable, start=0)` |
