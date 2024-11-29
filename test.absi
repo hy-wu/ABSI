@@ -1,0 +1,53 @@
+a_in_list1(a0, as) = {
+    (a:as){
+        (a == a0) ? {
+            >>> _+;  # future use +
+        }
+    }
+    >>> _-;  # future use -
+}
+
+>>> types >> Bool, Int, List;
+
+Bool a_in_list2(Int a0, List as) = {
+    i = 0;
+    (as[i]:?){
+        (as[i] == a0) ? {
+            >>> +;
+        }
+        i += 1;
+    }
+    >>> -;
+}
+
+# same as a0<-as
+
+Foo(TypeA a, TypeB b, TypeC c) = _{
+    .a = a;
+    .b = b;
+    .c = c;
+    .getA() = {
+        >>> .a;
+    }
+}
+
+EFoo(..., TypeD d) = Foo(...){
+    .d = d;
+    .getD() = {
+        >>> .d;
+    }
+}
+
+FFoo(TypeE e) = EFoo(0, 0, 0, d0){
+    .e = e;
+    .getE() = {
+        >>> .e;
+    }
+}
+
+(TypeR r1, TypeR r2, TypeP p0) foo(TypeA a0, TypeB b1, TypeC c2, TypeD d0=0) = {
+    # function body
+    >>> r1, r2, p0;
+}
+
+p = foo(a, b, c, d).p0;
