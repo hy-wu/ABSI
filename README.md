@@ -63,10 +63,10 @@ Example:
 a_in_list1(a0, as) = {
     (a:as){
         (a == a0) ? {
-            >>> +;
+            >>> +;  # currently use _+
         }
     }
-    >>> -;
+    >>> -;  # currently use _-
 }
 
 >>> types >> Bool, Int, List;
